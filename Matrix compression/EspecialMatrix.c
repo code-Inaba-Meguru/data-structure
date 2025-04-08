@@ -1,5 +1,3 @@
-#include <assert.h>
-#include <math.h>
 #include "matrix.h"
 
 //∂‘≥∆æÿ’Û(Symmetric matrix)

@@ -1,7 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "matrix.h"
 //仅作算法原理演示，传参方式需参考数组的创建方式
 
@@ -58,59 +55,67 @@ void view(ElemType* SaveData) {
 	printf("\n");
 }
 
-int main() {
-	ElemType* SaveData = (ElemType*)malloc(sizeof(ElemType) * (1 + (ORDER * (ORDER + 1) / 2)));
-	if (!SaveData) {
-		printf("overflow\n");
-		return 1;
-	}
-	memset(SaveData, 0, sizeof(ElemType) * (1 + (ORDER * (ORDER + 1) / 2)));
-	//测试对称矩阵
-	SaveSymMatrix(SymMatrix, SaveData, ORDER);
-	view(SaveData);
-	output(SaveData, LoadSymMatrix);
+//int main() {
+//	ElemType* SaveData = (ElemType*)malloc(sizeof(ElemType) * (1 + (ORDER * (ORDER + 1) / 2)));
+//	if (!SaveData) {
+//		printf("overflow\n");
+//		return 1;
+//	}
+//	memset(SaveData, 0, sizeof(ElemType) * (1 + (ORDER * (ORDER + 1) / 2)));
+//	//测试对称矩阵
+//	SaveSymMatrix(SymMatrix, SaveData, ORDER);
+//	view(SaveData);
+//	output(SaveData, LoadSymMatrix);
+//
+//	//测试上三角矩阵
+//	SaveUTriMatrix(UTriMatrix, SaveData, ORDER);
+//	view(SaveData);
+//	output(SaveData, LoadUTriMatrix);
+//
+//	//测试下三角矩阵
+//	SaveDTriMatrix(DTriMatrix, SaveData, ORDER);
+//	view(SaveData);
+//	output(SaveData, LoadDTriMatrix);
+//	free(SaveData);
+//	SaveData = NULL;
+//
+//	int wide = 3;
+//	ElemType* SaveData2 = (ElemType*)malloc(ORDER * wide*sizeof(ElemType));
+//	if (!SaveData2) {
+//		printf("overflow\n");
+//		return 1;
+//	}
+//	memset(SaveData2, 0, ORDER * wide * sizeof(ElemType));
+//	//测试主对角矩阵
+//	SavePriDiagMatrix(PriDiagMatrix, SaveData2, wide);
+//	for (int i = 0; i < ORDER*wide; i++)
+//		printf("%-3d", SaveData2[i]);
+//	printf("\n");//查看存储内容
+//	for (int i = 0; i < ORDER; i++) {
+//		for (int j = 0; j < ORDER; j++)
+//			printf("%-3d", LoadPriDiagMatrix(SaveData2, i, j, wide));
+//		printf("\n");//读取存档
+//	}
+//
+//	//测试副对角矩阵
+//	SaveSubDiagMatrix(SubDiagMatrix, SaveData2, wide);
+//	for (int i = 0; i < ORDER * wide; i++)
+//		printf("%-3d", SaveData2[i]);
+//	printf("\n");//查看存储内容
+//	for (int i = 0; i < ORDER; i++) {
+//		for (int j = 0; j < ORDER; j++)
+//			printf("%-3d", LoadSubDiagMatrix(SaveData2, i, j, wide));
+//		printf("\n");//读取存档
+//	}
+//	free(SaveData2);
+//	SaveData2 = NULL;
+//	return 0;
+//}
 
-	//测试上三角矩阵
-	SaveUTriMatrix(UTriMatrix, SaveData, ORDER);
-	view(SaveData);
-	output(SaveData, LoadUTriMatrix);
+ElemType SparseMatrix[ROW][COL] = {
+	{0,0,3,0,0,0},
+	{7,0,0,3,4,0},
+	{0,0,0,0,0,0},
+	{1,1,4,5,1,4}
+};
 
-	//测试下三角矩阵
-	SaveDTriMatrix(DTriMatrix, SaveData, ORDER);
-	view(SaveData);
-	output(SaveData, LoadDTriMatrix);
-	free(SaveData);
-	SaveData = NULL;
-
-	int wide = 3;
-	ElemType* SaveData2 = (ElemType*)malloc(ORDER * wide*sizeof(ElemType));
-	if (!SaveData2) {
-		printf("overflow\n");
-		return 1;
-	}
-	memset(SaveData2, 0, ORDER * wide * sizeof(ElemType));
-	//测试主对角矩阵
-	SavePriDiagMatrix(PriDiagMatrix, SaveData2, wide);
-	for (int i = 0; i < ORDER*wide; i++)
-		printf("%-3d", SaveData2[i]);
-	printf("\n");//查看存储内容
-	for (int i = 0; i < ORDER; i++) {
-		for (int j = 0; j < ORDER; j++)
-			printf("%-3d", LoadPriDiagMatrix(SaveData2, i, j, wide));
-		printf("\n");//读取存档
-	}
-
-	//测试副对角矩阵
-	SaveSubDiagMatrix(SubDiagMatrix, SaveData2, wide);
-	for (int i = 0; i < ORDER * wide; i++)
-		printf("%-3d", SaveData2[i]);
-	printf("\n");//查看存储内容
-	for (int i = 0; i < ORDER; i++) {
-		for (int j = 0; j < ORDER; j++)
-			printf("%-3d", LoadSubDiagMatrix(SaveData2, i, j, wide));
-		printf("\n");//读取存档
-	}
-	free(SaveData2);
-	SaveData2 = NULL;
-	return 0;
-}
